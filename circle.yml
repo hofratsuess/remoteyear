@@ -1,0 +1,9 @@
+machine:
+  timezone:
+    Europe/Zurich
+  php:
+    version: 7.0.4
+test:
+  override:
+  # Don't run any tests
+  - ls la
