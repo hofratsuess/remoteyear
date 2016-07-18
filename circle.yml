@@ -6,4 +6,4 @@ machine:
 test:
   override:
   # Don't run any tests
-  - ls la
+  - "ls -la"
