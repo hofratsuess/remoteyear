@@ -43,3 +43,5 @@ AddType font/woff .woff
     # E_ALL | E_STRICT
     php_value error_reporting 32767
 </ifModule>
+
+Header set Access-Control-Allow-Origin "*"
