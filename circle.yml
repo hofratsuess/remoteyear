@@ -20,3 +20,6 @@ deployment:
     commands:
       # Deploy the site to the production server
       - rsync -aqz -e ssh . $SSH_USER@$SSH_HOST:$SSH_PATH
+
+      # Notify the team on slack about the glorious event!
+      - ./scripts/send_slack_notification.sh api.remoteyear.hofratsuess.ch
