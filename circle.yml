@@ -13,3 +13,10 @@ test:
   override:
   # Don't run any tests
   - "ls -la"
+
+deployment:
+  production:
+    branch: hofratsuess
+    commands:
+      # Deploy the site to the production server
+      - rsync aqz -e ssh . $SSH_USER@$SSH_HOST:$SSH_PATH
