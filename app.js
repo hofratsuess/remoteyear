@@ -1,6 +1,6 @@
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
-  var apiKey = "<please put the token here>";
+  var apiKey = "N3v1dbZ9X0alN1ih";
 
   var isAttributeFilled = function (value) {
     if (typeof value !== 'undefined' && value !== null && value !== "") {
@@ -13,7 +13,9 @@ jQuery(document).ready(function($) {
   // Extract the city id from the html.
   var getCityId = function(remoteyearEntry) {
     var elementId = remoteyearEntry.attr('id');
+    console.log(elementId);
     var cityId = elementId.split('_')[1];
+    console.log(cityId);
     return cityId;
   };
 
@@ -27,6 +29,7 @@ jQuery(document).ready(function($) {
     // Create the container
     var main = $('<div></div>')
                 .css('font-family', 'Biryani', 'sans-serif')
+                .css('letter-spacing', '0.3px')
                 .css('-webkit-font-smoothing', 'antialiased')
                 .css('background-color', '#5F32D6')
                 .css('padding', '15px')
@@ -37,7 +40,10 @@ jQuery(document).ready(function($) {
                               .css('font-weight', '300')
                               .css('font-size', '24px')
                               .css('color', 'white')
-                              .css('text-decoration', 'underline')
+                              // .css('text-decoration', 'underline')
+                              .css('border-bottom', '2px solid')
+                              .css('display', 'inline')
+                              // .css('padding', '-5px')
                               .css('margin', '0px')
                             );
 
@@ -59,6 +65,52 @@ jQuery(document).ready(function($) {
     if (isAttributeFilled(cityData.location)) {
       main.append($('<input />').val(cityData.location));
     }
+
+    // add a button to let the visitor know why marc is away
+    var buttonText = "Warum ist Marc in Valencia?";
+    var $button = $('<a />')
+                    .text(buttonText)
+                    .attr('href', 'http://hofratsuess.ch/das-neue-normal-global-digital-arbeiten')
+                    .css('display', 'inline-block')
+                    .css('font-weight', '200')
+                    .css('-webkit-font-smoothing', 'subpixel-antialiased')
+                    .css('text-rendering', 'optimizeLegibility')
+                    .css('text-decoration', 'none')
+                    .css('padding', '10px 20px')
+                    .css('padding-top', '13px')
+                    .css('font-size', '11px')
+                    .css('color', '#fff')
+                    .css('text-align', 'center')
+                    .css('cursor', 'pointer')
+                    .css('outline', 'none')
+                    .css('background-color', '#ED5C41')
+                    .css('border',  'none')
+                    .css('border-radius', '200px')
+                    .css('box-shadow', '0 3px #BB2A0F')
+                    ;
+
+    $button
+      .mouseover(function() {
+        $(this).css('background-color', '#BB2A0F')
+                .css('box-shadow', '0 3px #890000');
+      })
+      .mouseout(function() {
+        $(this).css('background-color', '#ED5C41')
+                .css('box-shadow', '0 3px #BB2A0F');
+      })
+      .mousedown(function() {
+        $(this).css('background-color', '#BB2A0F')
+                .css('box-shadow', '0 1px #890000')
+                .css('transform', 'translateY(2px)');
+      })
+      .mouseup(function() {
+        $(this).css('background-color', '#ED5C41')
+                .css('box-shadow', '0 3px #BB2A0F')
+                .css('transform', 'translateY(-2px)');
+      });
+
+    main.append($('<br/>'));
+    main.append($button);
 
     $('#remoteyear_' + cityData.id).empty().append(main);
   };
