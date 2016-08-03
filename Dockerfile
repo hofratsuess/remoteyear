@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var
 	&& docker-php-ext-install gd mysqli pdo_mysql
 
 RUN apt-get update && apt-get install -y libmcrypt-dev && docker-php-ext-install mcrypt
-RUN apt-get update && apt-get install zip unzip git-core -y
+RUN apt-get update && apt-get install zip unzip git-core wget -y
 
 RUN service apache2 restart
 
