@@ -19,4 +19,4 @@ deployment:
     branch: hofratsuess
     commands:
       # Deploy the site to the production server
-      - rsync aqz -e ssh . $SSH_USER@$SSH_HOST:$SSH_PATH
+      - rsync -aqz -e ssh . $SSH_USER@$SSH_HOST:$SSH_PATH
