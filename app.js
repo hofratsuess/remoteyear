@@ -63,7 +63,14 @@ jQuery(document).ready(function($) {
 
     // Add the place of residence
     if (isAttributeFilled(cityData.location)) {
-      main.append($('<input />').val(cityData.location));
+      var google_api_key = 'AIzaSyB_6FYAyNhytAveixeKolVAmiI6DLz1ytI';
+      var google_map_zoom = '12';
+      var google_map_size = '640x400';
+      var google_map_type = 'terrain';
+      var google_map = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size+'&key='+google_api_key;
+
+      main.append($('<div></div>').append('<img width="100%" src="'+google_map+'" />'));
+
     }
 
     // add a button to let the visitor know why marc is away
@@ -86,8 +93,7 @@ jQuery(document).ready(function($) {
                     .css('background-color', '#ED5C41')
                     .css('border',  'none')
                     .css('border-radius', '200px')
-                    .css('box-shadow', '0 3px #BB2A0F')
-                    ;
+                    .css('box-shadow', '0 3px #BB2A0F');
 
     $button
       .mouseover(function() {
