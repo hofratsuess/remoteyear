@@ -67,15 +67,75 @@ jQuery(document).ready(function($) {
       var google_map_zoom = '12';
       var google_map_size = '640x400';
       var google_map_type = 'terrain';
-      var google_map = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size+'&key='+google_api_key;
+      var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size+'&key='+google_api_key;
+      var google_map = $('<div><h1>Place of residence</h1></div>').append('<img width="100%" src="'+google_map_src+'" />').css('color', 'white');
 
-      main.append($('<div></div>').append('<img width="100%" src="'+google_map+'" />'));
+      main.append(google_map);
+    }
 
+    // Add events
+    if (isAttributeFilled(cityData.events)) {
+      var event = $('<div></div>').css('font-family', 'Biryani', 'sans-serif').css('color', 'white');
+
+      if (cityData.events.rows.length > 1 ) {
+        $(event).append('<h1>Events</h1>')
+                .css('font-weight', '300')
+                .css('display', 'inline')
+                .css('margin', '0px');
+      } else {
+        $(event).append('<h1>Event</h1>');
+      }
+
+      $(cityData.events.rows).each(function(index){
+        var row = $("<div></div>").append(
+          $('<h3></h3>').append(cityData.events.rows[index].date),
+          $('<a>', {
+            text: cityData.events.rows[index].name,
+            href: cityData.events.rows[index].link
+          }).css('color', 'white')
+        );
+        event.append(row);
+      });
+
+      main.append(event);
+    }
+
+    // Add sections
+    if(isAttributeFilled(cityData.sections)) {
+      var section = $('<div></div>')
+        .css('font-family', 'Biryani', 'sans-serif')
+        .css('color', 'white');
+
+      $(cityData.sections.rows).each(function(index){
+        var row = $("<div></div>").css('padding-top', '2rem').append(
+          $('<h1></h1>')
+            .css('display', 'inline')
+            .css('margin', '0px')
+            .append(cityData.sections.rows[index].title),
+          $('<p></p>').append(cityData.sections.rows[index].content)
+        );
+        section.append(row);
+      });
+
+      main.append(section);
+    }
+
+    // Add the next location
+    if (isAttributeFilled(cityData.next_location)) {
+      var row = $('<div></div>');
+      var title = 'Next Location';
+      row.append('<h1>'+title+'</h1>')
+          .css('margin', '0')
+          .append('<p>'+cityData.next_location+'</p>')
+          .css('color', 'white')
+          .css('padding-top', '.75rem');
+
+      main.append(row);
     }
 
     // add a button to let the visitor know why marc is away
     var buttonText = "Warum ist Marc in Valencia?";
-    var $button = $('<a />')
+    var button = $('<a />')
                     .text(buttonText)
                     .attr('href', 'http://hofratsuess.ch/das-neue-normal-global-digital-arbeiten')
                     .css('display', 'inline-block')
@@ -93,9 +153,10 @@ jQuery(document).ready(function($) {
                     .css('background-color', '#ED5C41')
                     .css('border',  'none')
                     .css('border-radius', '200px')
-                    .css('box-shadow', '0 3px #BB2A0F');
-
-    $button
+                    .css('box-shadow', '0 3px #BB2A0F')
+                    .css('margin-left', 'auto')
+                    .css('margin-right', 'auto');
+    button
       .mouseover(function() {
         $(this).css('background-color', '#BB2A0F')
                 .css('box-shadow', '0 3px #890000');
@@ -116,7 +177,7 @@ jQuery(document).ready(function($) {
       });
 
     main.append($('<br/>'));
-    main.append($button);
+    main.append(button);
 
     $('#remoteyear_' + cityData.id).empty().append(main);
   };
