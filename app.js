@@ -1,6 +1,6 @@
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
-  var apiKey = "N3v1dbZ9X0alN1ih";
+  var apiKey = "YFGuXdhlwRDbQUxn";
 
   var isAttributeFilled = function (value) {
     if (typeof value !== 'undefined' && value !== null && value !== "") {
