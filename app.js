@@ -1,6 +1,7 @@
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
   var apiKey = "YFGuXdhlwRDbQUxn";
+  var weatherApiKey = "c0d57f56be592a1aa15efab1fe194a5d";
 
   var isAttributeFilled = function (value) {
     if (typeof value !== 'undefined' && value !== null && value !== "") {
@@ -27,7 +28,7 @@ jQuery(document).ready(function($) {
 
   var renderSnippet = function(cityData) {
     // Create the container
-    var main = $('<div></div>')
+    var main = $('<div id="main"></div>')
                 .css('font-family', 'Biryani', 'sans-serif')
                 .css('letter-spacing', '0.3px')
                 .css('-webkit-font-smoothing', 'antialiased')
@@ -40,12 +41,29 @@ jQuery(document).ready(function($) {
                               .css('font-weight', '300')
                               .css('font-size', '24px')
                               .css('color', 'white')
-                              // .css('text-decoration', 'underline')
                               .css('border-bottom', '2px solid')
                               .css('display', 'inline')
-                              // .css('padding', '-5px')
                               .css('margin', '0px')
                             );
+
+    // Add the weather icon
+    if (isAttributeFilled(cityData.location)) {
+      var latLon = cityData.location.split(',');
+      var lat = latLon[0];
+      var lon = latLon[1];
+
+      $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + weatherApiKey + '&units=metric', function(data) {
+        console.log(data);
+        var weather_icon = $('<div></div>')
+          .append('<img src="http://openweathermap.org/img/w/'+data.weather[0].icon+'.png" />')
+          .append(
+            $('<p>', {
+              text: data.main.temp
+            })
+          )
+        main.append(weather_icon);
+      });
+    }
 
     // Add the details
     if (isAttributeFilled(cityData.details)) {
