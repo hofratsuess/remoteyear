@@ -124,10 +124,30 @@ jQuery(document).ready(function($) {
       var google_map_size_d = '640x400';
       var google_map_size_m = '400x400';
       var google_map_type = 'terrain';
-      var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size_d+'&key='+google_api_key;
+      var window_width_with_breakpoint = '554';
+
+      var resizeMap = function() {
+        $('#google_image_map').attr('src', getGoogleMapImageUrl(windowWidth()));
+      }
+
+      var getGoogleMapImageUrl = function(width) {
+        return 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+width+'&key='+google_api_key;
+      }
+
+      var windowWidth = function() {
+        if($(window).width() < window_width_with_breakpoint) {
+          return google_map_size_m;
+        } else {
+          return google_map_size_d;
+        }
+      };
+
+      $(window).resize(resizeMap);
+
+      var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+windowWidth()+'&key='+google_api_key;
       var google_map = $('<div><h3 style="font-size:0.875rem">Place of residence</h3></div>')
                         .css('font-size', '14px')
-                        .append('<img width="100%" src="'+google_map_src+'" />')
+                        .append('<img width="100%" id="google_image_map" src="'+google_map_src+'" />')
                         .css('color', 'white')
                         .css('padding-top', '0.2rem');
 
