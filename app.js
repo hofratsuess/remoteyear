@@ -49,11 +49,13 @@ jQuery(document).ready(function($) {
 
     // Add the details
     if (isAttributeFilled(cityData.details)) {
-      var cityDetails = $(cityData.details).css('list-style-type', 'disc')
+      var cityDetails = $(cityData.details)
+                                      .css('list-style-type', 'disc')
                                       .css('margin-top', '30px')
                                       .css('padding-left', '15px');
 
-      cityDetails.find("li").css('padding-bottom', '8px')
+      cityDetails.find("li")
+                  .css('padding-bottom', '8px')
                   .css('font-weight', '300')
                   .css('font-size', '14px')
                   .css('line-height', '24px')
@@ -61,38 +63,31 @@ jQuery(document).ready(function($) {
       main.append(cityDetails);
     }
 
-    // Add the place of residence
-    if (isAttributeFilled(cityData.location)) {
-      var google_api_key = 'AIzaSyB_6FYAyNhytAveixeKolVAmiI6DLz1ytI';
-      var google_map_zoom = '12';
-      var google_map_size = '640x400';
-      var google_map_type = 'terrain';
-      var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size+'&key='+google_api_key;
-      var google_map = $('<div><h1>Place of residence</h1></div>').append('<img width="100%" src="'+google_map_src+'" />').css('color', 'white');
-
-      main.append(google_map);
-    }
-
     // Add events
     if (isAttributeFilled(cityData.events)) {
-      var event = $('<div></div>').css('font-family', 'Biryani', 'sans-serif').css('color', 'white');
+      var event = $('<div></div>').css('font-family', 'Biryani', 'sans-serif').css('color', 'white').css('font-size', '0.875rem').css('padding-top', '1.5rem');
 
       if (cityData.events.rows.length > 1 ) {
-        $(event).append('<h1>Events</h1>')
-                .css('font-weight', '300')
+        $(event).append('<p>Events</p>')
+                .css('font-weight', '700')
                 .css('display', 'inline')
+                .css('padding-top', '1.5rem')
                 .css('margin', '0px');
       } else {
-        $(event).append('<h1>Event</h1>');
+        $(event).append('<p>Event</p>')
+                .css('font-size', '0.875rem')
+                .css('font-weight', '700')
+                .css('display', 'inline')
+                .css('margin', '0px');
       }
 
       $(cityData.events.rows).each(function(index){
-        var row = $("<div></div>").append(
-          $('<h3></h3>').append(cityData.events.rows[index].date),
+        var row = $("<div></div>").css('margin-top', '0.5rem').append(
+          $('<p></p>').append(cityData.events.rows[index].date).css('font-weight', '400').css('margin-bottom', '0'),
           $('<a>', {
             text: cityData.events.rows[index].name,
             href: cityData.events.rows[index].link
-          }).css('color', 'white')
+          }).css('text-decoration', 'none').css('font-weight', '400').css('color', '#38E36E').css('font-size', '0.875rem')
         );
         event.append(row);
       });
@@ -103,16 +98,18 @@ jQuery(document).ready(function($) {
     // Add sections
     if(isAttributeFilled(cityData.sections)) {
       var section = $('<div></div>')
+        .css('padding-top', '1.5rem')
         .css('font-family', 'Biryani', 'sans-serif')
         .css('color', 'white');
 
       $(cityData.sections.rows).each(function(index){
-        var row = $("<div></div>").css('padding-top', '2rem').append(
-          $('<h1></h1>')
+        var row = $("<div></div>").append(
+          $('<h3></h3>')
+            .css('font-size', '0.875rem')
             .css('display', 'inline')
             .css('margin', '0px')
             .append(cityData.sections.rows[index].title),
-          $('<p></p>').append(cityData.sections.rows[index].content)
+          $('<p></p>').append(cityData.sections.rows[index].content).css('text-decoration', 'none').css('font-weight', '400').css('color', '#38E36E').css('font-size', '0.875rem')
         );
         section.append(row);
       });
@@ -120,25 +117,44 @@ jQuery(document).ready(function($) {
       main.append(section);
     }
 
+    // Add the place of residence
+    if (isAttributeFilled(cityData.location)) {
+      var google_api_key = 'AIzaSyCcWYb058H2EWIJbZSesHAH4Aq__btVjiQ';
+      var google_map_zoom = '12';
+      var google_map_size_d = '640x400';
+      var google_map_size_m = '400x400';
+      var google_map_type = 'terrain';
+      var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+google_map_size_d+'&key='+google_api_key;
+      var google_map = $('<div><h3 style="font-size:0.875rem">Place of residence</h3></div>')
+                        .css('font-size', '14px')
+                        .append('<img width="100%" src="'+google_map_src+'" />')
+                        .css('color', 'white')
+                        .css('padding-top', '0.2rem');
+
+      main.append(google_map);
+    }
+
     // Add the next location
     if (isAttributeFilled(cityData.next_location)) {
-      var row = $('<div></div>');
+      var row = $('<div></div>').css('padding-top', '1.5rem');
       var title = 'Next Location';
-      row.append('<h1>'+title+'</h1>')
+      row.append('<h4 style="color:white">'+title+'</h4>')
+          .css('font-size', '0.875rem')
+          .css('font-weight', '700')
           .css('margin', '0')
           .append('<p>'+cityData.next_location+'</p>')
-          .css('color', 'white')
-          .css('padding-top', '.75rem');
+          .css('color', '#38E36E')
+          .css('font-weight', '400');
 
       main.append(row);
     }
 
     // add a button to let the visitor know why marc is away
-    var buttonText = "Warum ist Marc in Valencia?";
+    var buttonText = "Warum ist Marc in " +cityData.name+ " ?";
     var button = $('<a />')
                     .text(buttonText)
                     .attr('href', 'http://hofratsuess.ch/das-neue-normal-global-digital-arbeiten')
-                    .css('display', 'inline-block')
+                    .css('display', 'table')
                     .css('font-weight', '200')
                     .css('-webkit-font-smoothing', 'subpixel-antialiased')
                     .css('text-rendering', 'optimizeLegibility')
@@ -155,7 +171,7 @@ jQuery(document).ready(function($) {
                     .css('border-radius', '200px')
                     .css('box-shadow', '0 3px #BB2A0F')
                     .css('margin-left', 'auto')
-                    .css('margin-right', 'auto');
+                    .css('margin-right', 'auto')
     button
       .mouseover(function() {
         $(this).css('background-color', '#BB2A0F')
