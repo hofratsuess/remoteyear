@@ -239,21 +239,4 @@ jQuery(document).ready(function($) {
   console.log(getCityId($('.remoteyear').first()));
   loadCityData(getCityId($('.remoteyear').first()), function (d) { console.log(d); });
   loadCityData(getCityId($('.remoteyear').first()), renderSnippet);
-  // loadCityData(3, function (d) { console.log(d); });
-
-  // var foo = function (arg1, arg2, etc, callback) {
-  //   var result = arg1 + arg2 + etc;
-  //   // return result;
-  //   callback(null, result);
-  // }
-  //
-  // var fooCallback = function (error, result) {
-  //   // if (error) {
-  //   //   throw error;
-  //   // }
-  //   console.log(result);
-  // }
-  //
-  // foo(1, 2, 3, fooCallback);
-
 });
