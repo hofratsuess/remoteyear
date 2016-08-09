@@ -1,3 +1,5 @@
+$.getScript("skycons.js");
+
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
   var apiKey = "YFGuXdhlwRDbQUxn";
