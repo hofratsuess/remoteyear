@@ -3,7 +3,6 @@ $.getScript("skycons.js");
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
   var apiKey = "YFGuXdhlwRDbQUxn";
-  var weatherApiKey = "c0d57f56be592a1aa15efab1fe194a5d";
 
   var isAttributeFilled = function (value) {
     if (typeof value !== 'undefined' && value !== null && value !== "") {
