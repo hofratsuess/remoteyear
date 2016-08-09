@@ -52,17 +52,35 @@ jQuery(document).ready(function($) {
       var latLon = cityData.location.split(',');
       var lat = latLon[0];
       var lon = latLon[1];
+      var weather_icon_container = $('<div></div>');
+      main.append(weather_icon_container);
 
-      $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + weatherApiKey + '&units=metric', function(data) {
+      $.getJSON('https://8ionv3axtc.execute-api.eu-central-1.amazonaws.com/prod/locations/' + lon + '/' + lat + '/', function(data) {
         console.log(data);
+
         var weather_icon = $('<div></div>')
-          .append('<img src="http://openweathermap.org/img/w/'+data.weather[0].icon+'.png" />')
+          .append('<canvas id="icon1"></canvas>')
           .append(
             $('<p>', {
-              text: data.main.temp
-            })
+              text: Math.round(data.currently.temperature)
+            }).append("&#176;")
           )
-        main.append(weather_icon);
+          .append(
+            $('<p>', {
+              text: data.currently.time
+            })
+          );
+
+        weather_icon_container.append(weather_icon);
+
+        var icon = data.currently.icon.replace("-", "_").toUpperCase();
+        var skycons = new Skycons({"color": "white"});
+
+        skycons.add("icon1", Skycons[icon]);
+        skycons.play();
+
+
+
       });
     }
 
