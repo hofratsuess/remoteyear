@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
       var weather_icon_container = $('<div></div>');
       main.append(weather_icon_container);
 
-      $.getJSON('https://project-2591251083691024669.appspot.com/' + lon + '/' + lat + '/', function(data) {
+      $.getJSON('https://project-2591251083691024669.appspot.com/locations/' + lon + '/' + lat + '/', function(data) {
         console.log(data);
 
         var weather_icon = $('<div></div>')
