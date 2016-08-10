@@ -189,12 +189,14 @@ jQuery(document).ready(function($) {
               .css('margin-bottom', '0')
               .css('font-family', 'Biryani', 'sans-serif')
               .css('color', 'white')
+              .css('font-size', '0.875rem')
               .css('background-image', 'none'),
             $('<a>', {
               text: cityData.events.rows[index].name,
               href: cityData.events.rows[index].link
           }).css('text-decoration', 'none')
             .css('font-weight', '400')
+            .css('font-family', 'Biryani', 'sans-serif')
             .css('color', '#38E36E')
             .css('font-size', '0.875rem')
         );
@@ -217,11 +219,13 @@ jQuery(document).ready(function($) {
             .css('font-size', '0.875rem')
             .css('display', 'inline')
             .css('margin', '0px')
+            .css('font-family', 'Biryani', 'sans-serif')
             .append(cityData.sections.rows[index].title),
           $('<p></p>')
             .append(cityData.sections.rows[index].content)
             .css('text-decoration', 'none')
             .css('font-weight', '400')
+            .css('font-family', 'Biryani', 'sans-serif')
             .css('color', '#38E36E')
             .css('font-size', '0.875rem')
             .css('background-image', 'none')
@@ -243,11 +247,22 @@ jQuery(document).ready(function($) {
 
       var resizeMap = function() {
         $('#google_image_map').attr('src', getGoogleMapImageUrl(windowWidth()));
-      }
+      };
 
       var getGoogleMapImageUrl = function(width) {
-        return 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+width+'&key='+google_api_key;
-      }
+        return 'https://maps.googleapis.com/maps/api/staticmap?center='
+          + cityData.location
+          + '&scale=2&markers=color:red%7Clabel:%7C'
+          + cityData.location
+          + '&maptype='
+          + google_map_type
+          + '&zoom='
+          + google_map_zoom
+          + '&size='
+          + width
+          + '&key='
+          + google_api_key;
+      };
 
       var windowWidth = function() {
         if($(window).width() < window_width_with_breakpoint) {
