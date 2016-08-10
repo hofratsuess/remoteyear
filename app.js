@@ -91,8 +91,7 @@ jQuery(document).ready(function($) {
 
           skycons.add("icon1", Skycons[icon]);
           skycons.play();
-        });
-
+          
           // made canvas retina ready
           var canvas = document.getElementById('icon1');
 
