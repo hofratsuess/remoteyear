@@ -154,12 +154,12 @@ jQuery(document).ready(function($) {
       var event = $('<div></div>')
         .css('font-family', 'Biryani', 'sans-serif')
         .css('color', 'white')
-        .css('font-size', '0.875rem')
         .css('padding-top', '1.5rem');
 
       if (cityData.events.rows.length > 1 ) {
         $(event).append($('<p>Events</p>')
                 .css('font-family', 'Biryani', 'sans-serif')
+                .css('font-size', '0.875rem')
                 .css('font-weight', '700')
                 .css('display', 'inline')
                 .css('padding-top', '1.5rem')
@@ -296,6 +296,7 @@ jQuery(document).ready(function($) {
           .css('margin', '0')
           .append($('<p>'+cityData.next_location+'</p>')
             .css('color', '#38E36E')
+            .css('font-size', '0.875rem')
             .css('font-weight', '400')
             .css('background-image', 'none')
             .css('font-family', 'Biryani')
