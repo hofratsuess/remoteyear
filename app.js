@@ -153,19 +153,21 @@ jQuery(document).ready(function($) {
         .css('padding-top', '1.5rem');
 
       if (cityData.events.rows.length > 1 ) {
-        $(event).append('<p>Events</p>')
+        $(event).append($('<p>Events</p>')
                 .css('font-weight', '700')
                 .css('display', 'inline')
                 .css('padding-top', '1.5rem')
                 .css('margin', '0px')
-                .css('background-image', 'none');
+                .css('background-image', 'none')
+              );
       } else {
-        $(event).append('<p>Event</p>')
+        $(event).append($('<p>Event</p>')
                 .css('font-size', '0.875rem')
                 .css('font-weight', '700')
                 .css('display', 'inline')
                 .css('margin', '0px')
-                .css('background-image', 'none');
+                .css('background-image', 'none')
+              );
       }
 
       $(cityData.events.rows).each(function(index){
