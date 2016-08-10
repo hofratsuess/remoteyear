@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
   var loadAdditionalScripts = function(callback) {
     $.getScript(url+"/moment.js", function(data, textStatus, jqxhr) {
       $.getScript(
-        "moment-timezone-with-data-2010-2020.js",
+        url+"/moment-timezone-with-data-2010-2020.js",
         function(data, textStatus, jqxhr){
           $.getScript(url+"/skycons.js", function(data, textStatus, jqxhr) {
             callback();
