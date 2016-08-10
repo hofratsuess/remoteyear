@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
         console.log(data);
         loadAdditionalScripts(function(){
           var weather_icon = $('<div></div>').css('float', 'right').css('margin-top', '-50px')
-            .append($('<canvas height="24" width="24" id="icon1"></canvas>').css('padding-top', '10px'))
+            .append($('<canvas height="48" width="48" id="icon1"></canvas>').css('padding-top', '10px'))
             .append(
               $('<span>', {
                 text: Math.round(data.currently.temperature)
@@ -93,10 +93,28 @@ jQuery(document).ready(function($) {
           skycons.play();
         });
 
+          // made canvas retina ready
+          var canvas = document.getElementById('icon1');
 
+          window.canvas = canvas;
 
+          if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
 
+            var factor = 1;
 
+            // retina display?
+            var isRetina = (window.devicePixelRatio > 1);
+
+            // iOS? (-> no auto double)
+            var isIOS = ((ctx.webkitBackingStorePixelRatio < 2) || (ctx.webkitBackingStorePixelRatio == undefined));
+
+            if (isRetina && isIOS) {
+              factor = 2;
+            }
+            canvas.setAttribute('style', 'height: 24px;widht:24px;padding-top:10px;');
+          }
+        });
       });
     }
 
