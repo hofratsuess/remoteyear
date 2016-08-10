@@ -71,18 +71,31 @@ jQuery(document).ready(function($) {
       $.getJSON('https://project-2591251083691024669.appspot.com/locations/' + lon + '/' + lat + '/', function(data) {
         console.log(data);
         loadAdditionalScripts(function(){
-          var weather_icon = $('<div></div>').css('float', 'right').css('margin-top', '-50px')
-            .append($('<canvas height="48" width="48" id="icon1"></canvas>').css('padding-top', '10px'))
+          var weather_icon = $('<div></div>')
+            .css('float', 'right')
+            .css('margin-top', '-50px')
+            .append($('<canvas height="48" width="48" id="icon1"></canvas>')
+              .css('padding-top', '10px'))
             .append(
               $('<span>', {
                 text: Math.round(data.currently.temperature)
-              }).css('padding-left', '5px').css('vertical-align', 'super').append("&#176;").css('color', 'white')
+              }).css('padding-left', '5px')
+                .css('vertical-align', 'super')
+                .append("&#176;")
+                .css('color', 'white')
             )
-            .append($('<hr>').css('border-style', 'solid').css('border-color', 'white').css('margin', '0'))
+            .append($('<hr>')
+              .css('border-style', 'solid')
+              .css('border-color', 'white')
+              .css('margin', '0'))
             .append(
               $('<p>', {
                 text: moment(new Date()).tz(data.timezone).format('H:mm')
-              }).css('color', 'white').css('margin', '0').css('text-align', 'center').css('padding-top', '5px').css('background-image', 'none')
+              }).css('color', 'white')
+                .css('margin', '0')
+                .css('text-align', 'center')
+                .css('padding-top', '5px')
+                .css('background-image', 'none')
             );
 
           weather_icon_container.append(weather_icon);
@@ -136,7 +149,11 @@ jQuery(document).ready(function($) {
 
     // Add events
     if (isAttributeFilled(cityData.events)) {
-      var event = $('<div></div>').css('font-family', 'Biryani', 'sans-serif').css('color', 'white').css('font-size', '0.875rem').css('padding-top', '1.5rem');
+      var event = $('<div></div>')
+        .css('font-family', 'Biryani', 'sans-serif')
+        .css('color', 'white')
+        .css('font-size', '0.875rem')
+        .css('padding-top', '1.5rem');
 
       if (cityData.events.rows.length > 1 ) {
         $(event).append('<p>Events</p>')
@@ -155,15 +172,17 @@ jQuery(document).ready(function($) {
       }
 
       $(cityData.events.rows).each(function(index){
-        var row = $("<div></div>").css('margin-top', '0.5rem').append(
-          $('<p></p>')
-            .append(cityData.events.rows[index].date)
-            .css('font-weight', '400')
-            .css('margin-bottom', '0')
-            .css('background-image', 'none'),
-          $('<a>', {
-            text: cityData.events.rows[index].name,
-            href: cityData.events.rows[index].link
+        var row = $("<div></div>")
+          .css('margin-top', '0.5rem')
+          .append(
+            $('<p></p>')
+              .append(cityData.events.rows[index].date)
+              .css('font-weight', '400')
+              .css('margin-bottom', '0')
+              .css('background-image', 'none'),
+            $('<a>', {
+              text: cityData.events.rows[index].name,
+              href: cityData.events.rows[index].link
           }).css('text-decoration', 'none')
             .css('font-weight', '400')
             .css('color', '#38E36E')
