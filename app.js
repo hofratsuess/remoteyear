@@ -262,7 +262,9 @@ jQuery(document).ready(function($) {
       var google_map_src = 'https://maps.googleapis.com/maps/api/staticmap?center='+cityData.location+'&scale=2&markers=color:red%7Clabel:%7C'+cityData.location+'&maptype='+google_map_type+'&zoom='+google_map_zoom+'&size='+windowWidth()+'&key='+google_api_key;
       var google_map = $('<div><h3 style="font-size:0.875rem">Place of residence</h3></div>')
                         .css('font-size', '14px')
-                        .append('<img width="100%" id="google_image_map" src="'+google_map_src+'" />')
+                        .append(
+                          $('<img width="100%" id="google_image_map" src="'+google_map_src+'" />')
+                            .css('border', 'none'))
                         .css('color', 'white')
                         .css('padding-top', '0.2rem');
 
@@ -281,6 +283,7 @@ jQuery(document).ready(function($) {
             .css('color', '#38E36E')
             .css('font-weight', '400')
             .css('background-image', 'none')
+            .css('font-family', 'Biryani')
           );
 
       main.append(row);
