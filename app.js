@@ -1,15 +1,16 @@
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
+  var url = 'https://api.remoteyear.hofratsuess.ch';
   var apiKey = "YFGuXdhlwRDbQUxn";
   var font_biryani = '<link href="https://fonts.googleapis.com/css?family=Biryani:300,200,400,600,700,800,900" rel="stylesheet" type="text/css">';
   $('head').append(font_biryani);
 
   var loadAdditionalScripts = function(callback) {
-    $.getScript("moment.js", function(data, textStatus, jqxhr) {
+    $.getScript(url+"/moment.js", function(data, textStatus, jqxhr) {
       $.getScript(
         "moment-timezone-with-data-2010-2020.js",
         function(data, textStatus, jqxhr){
-          $.getScript("skycons.js", function(data, textStatus, jqxhr) {
+          $.getScript(url+"/skycons.js", function(data, textStatus, jqxhr) {
             callback();
           });
         });
@@ -34,7 +35,7 @@ jQuery(document).ready(function($) {
   };
 
   var loadCityData = function(cityId, callback) {
-    $.getJSON('https://api.remoteyear.hofratsuess.ch/api/1/tables/cities/rows/' + cityId + '?access_token=' + apiKey, function(data) {
+    $.getJSON(url+'/api/1/tables/cities/rows/' + cityId + '?access_token=' + apiKey, function(data) {
       callback(data);
     });
   };
@@ -91,7 +92,7 @@ jQuery(document).ready(function($) {
 
           skycons.add("icon1", Skycons[icon]);
           skycons.play();
-          
+
           // made canvas retina ready
           var canvas = document.getElementById('icon1');
 
