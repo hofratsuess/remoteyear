@@ -122,7 +122,7 @@ jQuery(document).ready(function($) {
             if (isRetina && isIOS) {
               factor = 2;
             }
-            canvas.setAttribute('style', 'height: 24px;widht:24px;padding-top:10px;');
+            canvas.setAttribute('style', 'height: 24px;width:24px;padding-top:10px;');
           }
         });
       });
