@@ -319,4 +319,5 @@ jQuery(document).ready(function($) {
 
     $('#remoteyear_' + cityData.id).empty().append(main);
   };
+  loadCityData(getCityId($('.remoteyear').first()), renderSnippet);
 });
