@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
             .append(
               $('<p>', {
                 text: moment(new Date()).tz(data.timezone).format('H:mm')
-              }).css('color', 'white').css('margin', '0').css('text-align', 'center').css('padding-top', '5px')
+              }).css('color', 'white').css('margin', '0').css('text-align', 'center').css('padding-top', '5px').css('background-image', 'none')
             );
 
           weather_icon_container.append(weather_icon);
@@ -143,22 +143,31 @@ jQuery(document).ready(function($) {
                 .css('font-weight', '700')
                 .css('display', 'inline')
                 .css('padding-top', '1.5rem')
-                .css('margin', '0px');
+                .css('margin', '0px')
+                .css('background-image', 'none');
       } else {
         $(event).append('<p>Event</p>')
                 .css('font-size', '0.875rem')
                 .css('font-weight', '700')
                 .css('display', 'inline')
-                .css('margin', '0px');
+                .css('margin', '0px')
+                .css('background-image', 'none');
       }
 
       $(cityData.events.rows).each(function(index){
         var row = $("<div></div>").css('margin-top', '0.5rem').append(
-          $('<p></p>').append(cityData.events.rows[index].date).css('font-weight', '400').css('margin-bottom', '0'),
+          $('<p></p>')
+            .append(cityData.events.rows[index].date)
+            .css('font-weight', '400')
+            .css('margin-bottom', '0')
+            .css('background-image', 'none'),
           $('<a>', {
             text: cityData.events.rows[index].name,
             href: cityData.events.rows[index].link
-          }).css('text-decoration', 'none').css('font-weight', '400').css('color', '#38E36E').css('font-size', '0.875rem')
+          }).css('text-decoration', 'none')
+            .css('font-weight', '400')
+            .css('color', '#38E36E')
+            .css('font-size', '0.875rem')
         );
         event.append(row);
       });
@@ -180,7 +189,13 @@ jQuery(document).ready(function($) {
             .css('display', 'inline')
             .css('margin', '0px')
             .append(cityData.sections.rows[index].title),
-          $('<p></p>').append(cityData.sections.rows[index].content).css('text-decoration', 'none').css('font-weight', '400').css('color', '#38E36E').css('font-size', '0.875rem')
+          $('<p></p>')
+            .append(cityData.sections.rows[index].content)
+            .css('text-decoration', 'none')
+            .css('font-weight', '400')
+            .css('color', '#38E36E')
+            .css('font-size', '0.875rem')
+            .css('background-image', 'none')
         );
         section.append(row);
       });
