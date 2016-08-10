@@ -28,9 +28,7 @@ jQuery(document).ready(function($) {
   // Extract the city id from the html.
   var getCityId = function(remoteyearEntry) {
     var elementId = remoteyearEntry.attr('id');
-    console.log(elementId);
     var cityId = elementId.split('_')[1];
-    console.log(cityId);
     return cityId;
   };
 
@@ -69,7 +67,6 @@ jQuery(document).ready(function($) {
       main.append(weather_icon_container);
 
       $.getJSON('https://project-2591251083691024669.appspot.com/locations/' + lon + '/' + lat + '/', function(data) {
-        console.log(data);
         loadAdditionalScripts(function(){
           var weather_icon = $('<div></div>')
             .css('float', 'right')
@@ -322,8 +319,4 @@ jQuery(document).ready(function($) {
 
     $('#remoteyear_' + cityData.id).empty().append(main);
   };
-
-  console.log(getCityId($('.remoteyear').first()));
-  loadCityData(getCityId($('.remoteyear').first()), function (d) { console.log(d); });
-  loadCityData(getCityId($('.remoteyear').first()), renderSnippet);
 });
