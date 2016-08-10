@@ -80,6 +80,7 @@ jQuery(document).ready(function($) {
                 .css('vertical-align', 'super')
                 .append("&#176;")
                 .css('color', 'white')
+                .css('font-family', 'Biryani', 'sans-serif')
             )
             .append($('<hr>')
               .css('border-style', 'solid')
@@ -93,6 +94,7 @@ jQuery(document).ready(function($) {
                 .css('text-align', 'center')
                 .css('padding-top', '5px')
                 .css('background-image', 'none')
+                .css('font-family', 'Biryani', 'sans-serif')
             );
 
           weather_icon_container.append(weather_icon);
@@ -133,14 +135,16 @@ jQuery(document).ready(function($) {
       var cityDetails = $(cityData.details)
                                       .css('list-style-type', 'disc')
                                       .css('margin-top', '50px')
-                                      .css('padding-left', '15px');
+                                      .css('padding-left', '15px')
+                                      .css('font-family', 'Biryani', 'sans-serif');
 
       cityDetails.find("li")
                   .css('padding-bottom', '8px')
                   .css('font-weight', '300')
                   .css('font-size', '14px')
                   .css('line-height', '24px')
-                  .css('color', 'white');
+                  .css('color', 'white')
+                  .css('font-family', 'Biryani', 'sans-serif');
       main.append(cityDetails);
     }
 
@@ -154,6 +158,7 @@ jQuery(document).ready(function($) {
 
       if (cityData.events.rows.length > 1 ) {
         $(event).append($('<p>Events</p>')
+                .css('font-family', 'Biryani', 'sans-serif')
                 .css('font-weight', '700')
                 .css('display', 'inline')
                 .css('padding-top', '1.5rem')
@@ -162,6 +167,7 @@ jQuery(document).ready(function($) {
               );
       } else {
         $(event).append($('<p>Event</p>')
+                .css('font-family', 'Biryani', 'sans-serif')
                 .css('font-size', '0.875rem')
                 .css('font-weight', '700')
                 .css('display', 'inline')
@@ -178,6 +184,7 @@ jQuery(document).ready(function($) {
               .append(cityData.events.rows[index].date)
               .css('font-weight', '400')
               .css('margin-bottom', '0')
+              .css('font-family', 'Biryani', 'sans-serif')
               .css('background-image', 'none'),
             $('<a>', {
               text: cityData.events.rows[index].name,
