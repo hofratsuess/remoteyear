@@ -192,7 +192,7 @@ jQuery(document).ready(function($) {
               .css('font-size', '0.875rem')
               .css('background-image', 'none'),
             $('<a>', {
-              text: cityData.events.rows[index].name,
+              text: moment(cityData.events.rows[index].name).format('DD.MMMM.YYYY'),
               href: cityData.events.rows[index].link
           }).css('text-decoration', 'none')
             .css('font-weight', '400')
