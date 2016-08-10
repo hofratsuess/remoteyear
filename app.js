@@ -94,6 +94,7 @@ jQuery(document).ready(function($) {
                 .css('text-align', 'center')
                 .css('padding-top', '5px')
                 .css('background-image', 'none')
+                .css('font-size', '16px')
                 .css('font-family', 'Biryani', 'sans-serif')
             );
 
@@ -164,6 +165,7 @@ jQuery(document).ready(function($) {
                 .css('padding-top', '1.5rem')
                 .css('margin', '0px')
                 .css('background-image', 'none')
+                .css('color', 'white')
               );
       } else {
         $(event).append($('<p>Event</p>')
@@ -173,6 +175,7 @@ jQuery(document).ready(function($) {
                 .css('display', 'inline')
                 .css('margin', '0px')
                 .css('background-image', 'none')
+                .css('color', 'white')
               );
       }
 
@@ -185,6 +188,7 @@ jQuery(document).ready(function($) {
               .css('font-weight', '400')
               .css('margin-bottom', '0')
               .css('font-family', 'Biryani', 'sans-serif')
+              .css('color', 'white')
               .css('background-image', 'none'),
             $('<a>', {
               text: cityData.events.rows[index].name,
