@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
                 .css('-webkit-font-smoothing', 'antialiased')
                 .css('background-color', '#5F32D6')
                 .css('padding', '15px')
-                .css('margin', '0px');
+                .css('margin', '20px 0px');
 
     // Add the city name
     main.append($('<h1></h1>').text(cityData.name)
@@ -266,9 +266,11 @@ jQuery(document).ready(function($) {
           .css('font-size', '0.875rem')
           .css('font-weight', '700')
           .css('margin', '0')
-          .append('<p>'+cityData.next_location+'</p>')
-          .css('color', '#38E36E')
-          .css('font-weight', '400');
+          .append($('<p>'+cityData.next_location+'</p>')
+            .css('color', '#38E36E')
+            .css('font-weight', '400')
+            .css('background-image', 'none')
+          );
 
       main.append(row);
     }
