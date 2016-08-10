@@ -1,8 +1,20 @@
-$.getScript("skycons.js");
-
 // Wait for the page to be fully loaded
 jQuery(document).ready(function($) {
   var apiKey = "YFGuXdhlwRDbQUxn";
+  var font_biryani = '<link href="https://fonts.googleapis.com/css?family=Biryani:300,200,400,600,700,800,900" rel="stylesheet" type="text/css">';
+  $('head').append(font_biryani);
+
+  var loadAdditionalScripts = function(callback) {
+    $.getScript("moment.js", function(data, textStatus, jqxhr) {
+      $.getScript(
+        "moment-timezone-with-data-2010-2020.js",
+        function(data, textStatus, jqxhr){
+          $.getScript("skycons.js", function(data, textStatus, jqxhr) {
+            callback();
+          });
+        });
+    });
+  };
 
   var isAttributeFilled = function (value) {
     if (typeof value !== 'undefined' && value !== null && value !== "") {
@@ -57,27 +69,31 @@ jQuery(document).ready(function($) {
 
       $.getJSON('https://project-2591251083691024669.appspot.com/locations/' + lon + '/' + lat + '/', function(data) {
         console.log(data);
+        loadAdditionalScripts(function(){
+          var weather_icon = $('<div></div>').css('float', 'right').css('margin-top', '-50px')
+            .append($('<canvas height="24" width="24" id="icon1"></canvas>').css('padding-top', '10px'))
+            .append(
+              $('<span>', {
+                text: Math.round(data.currently.temperature)
+              }).css('padding-left', '5px').css('vertical-align', 'super').append("&#176;").css('color', 'white')
+            )
+            .append($('<hr>').css('border-style', 'solid').css('border-color', 'white').css('margin', '0'))
+            .append(
+              $('<p>', {
+                text: moment(new Date()).tz(data.timezone).format('H:mm')
+              }).css('color', 'white').css('margin', '0').css('text-align', 'center').css('padding-top', '5px')
+            );
 
-        var weather_icon = $('<div></div>')
-          .append('<canvas id="icon1"></canvas>')
-          .append(
-            $('<p>', {
-              text: Math.round(data.currently.temperature)
-            }).append("&#176;")
-          )
-          .append(
-            $('<p>', {
-              text: data.currently.time
-            })
-          );
+          weather_icon_container.append(weather_icon);
 
-        weather_icon_container.append(weather_icon);
+          var icon = data.currently.icon.replace(/\-/g, "_").toUpperCase();
+          var skycons = new Skycons({"color": "white"});
 
-        var icon = data.currently.icon.replace("-", "_").toUpperCase();
-        var skycons = new Skycons({"color": "white"});
+          skycons.add("icon1", Skycons[icon]);
+          skycons.play();
+        });
 
-        skycons.add("icon1", Skycons[icon]);
-        skycons.play();
+
 
 
 
@@ -88,7 +104,7 @@ jQuery(document).ready(function($) {
     if (isAttributeFilled(cityData.details)) {
       var cityDetails = $(cityData.details)
                                       .css('list-style-type', 'disc')
-                                      .css('margin-top', '30px')
+                                      .css('margin-top', '50px')
                                       .css('padding-left', '15px');
 
       cityDetails.find("li")
