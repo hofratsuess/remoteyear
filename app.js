@@ -180,27 +180,32 @@ jQuery(document).ready(function($) {
       }
 
       $(cityData.events.rows).each(function(index){
-        var row = $("<div></div>")
-          .css('margin-top', '0.5rem')
-          .append(
-            $('<p></p>')
-              .append(cityData.events.rows[index].date)
-              .css('font-weight', '400')
-              .css('margin-bottom', '0')
-              .css('font-family', 'Biryani', 'sans-serif')
-              .css('color', 'white')
-              .css('font-size', '0.875rem')
-              .css('background-image', 'none'),
-            $('<a>', {
-              text: moment(cityData.events.rows[index].name).format('DD.MMMM.YYYY'),
-              href: cityData.events.rows[index].link
-          }).css('text-decoration', 'none')
-            .css('font-weight', '400')
-            .css('font-family', 'Biryani', 'sans-serif')
-            .css('color', '#38E36E')
-            .css('font-size', '0.875rem')
-        );
-        event.append(row);
+        loadAdditionalScripts(function(){
+          var event_date = moment(cityData.events.rows[index].date).format('D. MMMM YYYY');
+
+          var row = $("<div></div>")
+            .css('margin-top', '0.5rem')
+            .append(
+              $('<p></p>', {
+                text: event_date
+              })
+                .css('font-weight', '400')
+                .css('margin-bottom', '0')
+                .css('font-family', 'Biryani', 'sans-serif')
+                .css('color', 'white')
+                .css('font-size', '0.875rem')
+                .css('background-image', 'none'),
+              $('<a>', {
+                text: cityData.events.rows[index].name,
+                href: cityData.events.rows[index].link
+              }).css('text-decoration', 'none')
+                .css('font-weight', '400')
+                .css('font-family', 'Biryani', 'sans-serif')
+                .css('color', '#38E36E')
+                .css('font-size', '0.875rem')
+            );
+          event.append(row);
+        });
       });
 
       main.append(event);
