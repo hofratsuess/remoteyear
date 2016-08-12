@@ -244,7 +244,7 @@ jQuery(document).ready(function($) {
     // Add the place of residence
     if (isAttributeFilled(cityData.location)) {
       var google_api_key = 'AIzaSyCcWYb058H2EWIJbZSesHAH4Aq__btVjiQ';
-      var google_map_zoom = '12';
+      var google_map_zoom = '16';
       var google_map_size_d = '640x400';
       var google_map_size_m = '400x400';
       var google_map_type = 'terrain';
@@ -284,11 +284,29 @@ jQuery(document).ready(function($) {
                         .css('font-size', '14px')
                         .append(
                           $('<img width="100%" id="google_image_map" src="'+google_map_src+'" />')
-                            .css('border', 'none'))
+                            .css('border', 'none')
+                        )
                         .css('color', 'white')
                         .css('padding-top', '0.2rem');
 
       main.append(google_map);
+    }
+
+    // add address
+    if (isAttributeFilled(cityData.location)) {
+
+      var address_row = $('<div></div>').css('color', 'rgb(56, 227, 110)');
+      var lat_lon_address = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+cityData.location+'&key='+google_api_key;
+      var place_of_residence = $.getJSON(lat_lon_address, function(data) {
+        address_row.append($('<a></a>', {
+          text: data.results[0].formatted_address,
+          href: 'http://google.com/maps/place/'+cityData.location
+        }).css('color', '#38E36E')
+          .css('text-decoration', 'none')
+          .css('font-size', '0.875rem'));
+      });
+
+      main.append(address_row);
     }
 
     // Add the next location
